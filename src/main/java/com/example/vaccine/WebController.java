@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -31,17 +32,27 @@ public class WebController implements WebMvcConfigurer{
 		return "form";
 	}
 
-	@PostMapping("/")
-	public String checkPersonInfo(@Valid Vaccine vaccine, BindingResult result) {
-		if(result.hasErrors()) {
-			return "form";
-		}
-		return "redirect:/result";
-	}	
-	@GetMapping("/result")
-	public String saveVaccine(@ModelAttribute Vaccine vaccine, Model model) {		
-		model.addAttribute("vaccine", vaccine);
-		return "result";
+	
+	@PostMapping("/result")
+	public String submitForm(@Valid @ModelAttribute("vaccine") Vaccine vaccine,
+	        BindingResult bindingResult, Model model) {
+	    System.out.println(vaccine);
+	     
+	    if (bindingResult.hasErrors()) {       
+	         
+	        return "form";
+	    } else {
+	        return "result";
+	    }
 	}
+	
+
+//	@RequestMapping("/save")
+//	public String saveVaccine(@ModelAttribute Vaccine vaccine, Model model) {		
+//		model.addAttribute("vaccine", vaccine);
+//		return "result";
+//	}
+	
+	
 
 }

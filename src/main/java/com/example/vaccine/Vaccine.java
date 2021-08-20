@@ -20,7 +20,7 @@ public class Vaccine {
 	private Integer age;
 	
 	@NotNull(message = "Không được bỏ trống")
-	@Size(min = 10 , message = "SĐT Phải bằng 10")
+	@Size(min = 10 , message = "SĐT Phải bằng 10 và không được hơn")
 	private String number;
 	
 	@NotNull(message = "Không được bỏ trống")
@@ -85,8 +85,6 @@ public class Vaccine {
 		this.birthday = birthday;
 	}
 
-	public String toString() {
-		return "Person(Name: " + this.name + ", Age: " + this.age + ")";
-	}
+
 
 }
